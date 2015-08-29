@@ -24,11 +24,15 @@ public class GroceryList extends AppCompatActivity implements OnClickListener{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+<<<<<<< HEAD
         setContentView(R.layout.activity_foodmate);
         total = (TextView)findViewById(R.id.grocery_list_total);
         addItem = (Button)findViewById(R.id.grocery_list_button);
         groceryListItemView = (GroceryListItemView)findViewById(R.id.grocery_list);
         addItem.setOnClickListener(this);
+=======
+        setContentView(R.layout.activity_grocery_list);
+>>>>>>> d47b2b72e78e074a613dc0a186b7a4e5382f8747
     }
 
     @Override
