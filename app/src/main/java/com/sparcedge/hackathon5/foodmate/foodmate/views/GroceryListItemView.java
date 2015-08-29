@@ -51,6 +51,21 @@ public class GroceryListItemView extends TableLayout {
 
     }
 
+    public int getGroceryType(View item) {
+        Drawable background = item.getBackground();
+        if (background.equals(ContextCompat.getDrawable(getContext(), R.drawable.dry_goods_background))) {
+            return AddGroceryListRowDialog.DRY_FOOD;
+        } else if (background.equals(ContextCompat.getDrawable(getContext(), R.drawable.produce_background))) {
+            return AddGroceryListRowDialog.PRODUCE;
+        } else if (background.equals(ContextCompat.getDrawable(getContext(), R.drawable.frozen_food_background))) {
+            return AddGroceryListRowDialog.FROZEN_FOOD;
+        } else if (background.equals(ContextCompat.getDrawable(getContext(), R.drawable.household_item_background))) {
+            return AddGroceryListRowDialog.HOUSEHOLD_ITEM;
+        } else {
+            return 0;
+        }
+    }
+
     private View createRow(int style){
         View v;
         LayoutInflater inflater = LayoutInflater.from(getContext());
