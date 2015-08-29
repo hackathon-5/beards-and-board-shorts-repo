@@ -117,6 +117,8 @@ public class GroceryList extends AppCompatActivity implements OnClickListener, D
 
             groceryItem.setId(Integer.toString(i));
 
+            groceryItem.setType(0);
+
             EditText editDescription = (EditText) row.getChildAt(0);
             groceryItem.setDescription(editDescription.getText().toString());
 
@@ -129,13 +131,14 @@ public class GroceryList extends AppCompatActivity implements OnClickListener, D
         if (!groceries.isEmpty()) {
             SharedPreferences savedGroceries = getSharedPreferences(mCurrentUser, Context.MODE_PRIVATE);
             SharedPreferences.Editor editor = savedGroceries.edit();
-            Set<String> groceryItemStrings = savedGroceries.getStringSet(GROCERIES, new HashSet<String>());
 
             // Clear out any previously stored groceries.
-            groceryItemStrings.clear();
+            editor.clear();
+
+            Set<String> groceryItemStrings = savedGroceries.getStringSet(GROCERIES, new HashSet<String>());
 
             for (GroceryListItem item : groceries) {
-                groceryItemStrings.add(item.toString());
+                groceryItemStrings.add(item.ToString());
             }
 
             editor.putStringSet(GROCERIES, groceryItemStrings);
@@ -163,6 +166,8 @@ public class GroceryList extends AppCompatActivity implements OnClickListener, D
                 {
                     // TODO Programmatically create a LinearLayout for each GroceryListItem
                     // and add them to the view.
+                    GroceryListItem item = groceries.get(i);
+                    groceryListItemView.addRow(item.getType());
                 }
             }
         }
