@@ -17,7 +17,7 @@ public class GroceryList extends AppCompatActivity implements OnClickListener{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_foodmate);
+        setContentView(R.layout.activity_grocery_list);
     }
 
     @Override

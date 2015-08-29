@@ -1,12 +1,14 @@
 package com.sparcedge.hackathon5.foodmate.foodmate.activities;
 
-
-import android.support.v7.app.AppCompatActivity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.EditText;
 
 import com.sparcedge.hackathon5.foodmate.foodmate.R;
 
@@ -14,12 +16,29 @@ import com.sparcedge.hackathon5.foodmate.foodmate.R;
     This is the class that controls the login for the app
  */
 
-public class Foodmate extends AppCompatActivity implements OnClickListener{
+public class Foodmate extends AppCompatActivity implements OnClickListener {
+
+    private Button mLoginButton;
+    private EditText mUsername;
+    private EditText mPassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_foodmate);
+
+        mLoginButton = (Button) findViewById(R.id.buttonLogin);
+        mUsername = (EditText) findViewById(R.id.username);
+        mPassword = (EditText) findViewById(R.id.password);
+
+        mLoginButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final String username = mUsername.getText().toString();
+                final String password = mPassword.getText().toString();
+                LogIn(username, password);
+            }
+        });
     }
 
     @Override
@@ -48,5 +67,12 @@ public class Foodmate extends AppCompatActivity implements OnClickListener{
     @Override
     public void onClick(View v) {
 
+    }
+
+    private void LogIn(String username, String password) {
+        if (null != username && null != password && username.equals("Noah")) {
+            Intent groceryIntent = new Intent(this, GroceryList.class);
+            startActivity(groceryIntent);
+        }
     }
 }
