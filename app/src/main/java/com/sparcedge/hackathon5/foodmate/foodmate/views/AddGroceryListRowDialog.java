@@ -14,6 +14,11 @@ import com.sparcedge.hackathon5.foodmate.foodmate.activities.GroceryList;
  */
 public class AddGroceryListRowDialog extends DialogFragment {
 
+    public static final int DRY_FOOD        = 0;
+    public static final int PRODUCE         = 1;
+    public static final int FROZEN_FOOD     = 2;
+    public static final int HOUSEHOLD_ITEM  = 3;
+
     private int selectedChoice;
     private GroceryList activity;
 
