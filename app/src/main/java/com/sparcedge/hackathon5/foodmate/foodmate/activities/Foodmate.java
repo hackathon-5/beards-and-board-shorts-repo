@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.sparcedge.hackathon5.foodmate.foodmate.R;
 
@@ -85,6 +86,8 @@ public class Foodmate extends AppCompatActivity implements OnClickListener {
                 Intent groceryIntent = new Intent(this, GroceryList.class);
                 groceryIntent.putExtra(CURRENT_USER, username);
                 startActivity(groceryIntent);
+            } else {
+                Toast.makeText(this, "Login Failed!", Toast.LENGTH_LONG).show();
             }
         }
     }
