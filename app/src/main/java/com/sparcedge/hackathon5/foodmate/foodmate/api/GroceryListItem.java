@@ -9,6 +9,9 @@ public class GroceryListItem {
     private String description;
     private Boolean checked;
 
+    public GroceryListItem() {
+    }
+
     public GroceryListItem(String id, String description, Boolean checked) {
         this.id = id;
         this.description = description;
