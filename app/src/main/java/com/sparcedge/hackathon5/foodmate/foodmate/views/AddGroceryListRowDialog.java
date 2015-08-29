@@ -26,7 +26,7 @@ public class AddGroceryListRowDialog extends DialogFragment {
     public Dialog onCreateDialog(Bundle savedInstanceState){
         activity = (GroceryList) getActivity();
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
-        builder.setTitle("Select Item Type")
+        builder.setTitle(getResources().getString(R.string.select_item_dialog_title))
                 .setSingleChoiceItems(R.array.item_types, -1, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {

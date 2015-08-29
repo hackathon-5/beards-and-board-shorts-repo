@@ -67,7 +67,7 @@ public class GroceryList extends AppCompatActivity implements OnClickListener, D
 
     @Override
     public void onAcceptClick() {
-        groceryListItemView.addRod(addGroceryListRowDialog.getSelectedChoice());
+        groceryListItemView.addRow(addGroceryListRowDialog.getSelectedChoice());
     }
 
     @Override

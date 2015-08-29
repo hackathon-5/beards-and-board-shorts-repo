@@ -24,9 +24,10 @@ public class GroceryListItemView extends TableLayout {
 
     public GroceryListItemView(Context context, AttributeSet attrs) {
         super(context, attrs);
+        rows = new int[getResources().getInteger(R.integer.row_types)];
     }
 
-    public void addRod(int style){
+    public void addRow(int style){
         switch (style){
             case AddGroceryListRowDialog.DRY_FOOD:
                 addView(createRow(style),rows[AddGroceryListRowDialog.DRY_FOOD]);
