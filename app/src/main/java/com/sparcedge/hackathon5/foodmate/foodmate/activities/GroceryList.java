@@ -1,6 +1,8 @@
 package com.sparcedge.hackathon5.foodmate.foodmate.activities;
 
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
@@ -11,9 +13,6 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.TableRow;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.sparcedge.hackathon5.foodmate.foodmate.R;
 import com.sparcedge.hackathon5.foodmate.foodmate.api.DialogOnClickListener;
@@ -22,13 +21,15 @@ import com.sparcedge.hackathon5.foodmate.foodmate.views.AddGroceryListRowDialog;
 import com.sparcedge.hackathon5.foodmate.foodmate.views.GroceryListItemView;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * this class is the actual list view
  */
 public class GroceryList extends AppCompatActivity implements OnClickListener, DialogOnClickListener {
-
+    public static final String GROCERIES = "Groceries";
     Button addItem = null;
     Button saveList = null;
     GroceryListItemView groceryListItemView = null;
@@ -122,9 +123,16 @@ public class GroceryList extends AppCompatActivity implements OnClickListener, D
         }
 
         if (!groceries.isEmpty()) {
-            Toast.makeText(
-                    this, "There are " + groceries.size() + " groceries in the list",
-                    Toast.LENGTH_LONG).show();
+            SharedPreferences savedGroceries = getSharedPreferences(mCurrentUser, Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = savedGroceries.edit();
+            Set<String> groceryItemStrings = savedGroceries.getStringSet(GROCERIES, new HashSet<String>());
+
+            for (GroceryListItem item : groceries) {
+                groceryItemStrings.add(item.toString());
+            }
+
+            editor.putStringSet(GROCERIES, groceryItemStrings);
+            editor.commit();
         }
     }
 }
