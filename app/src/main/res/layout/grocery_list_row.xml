@@ -7,18 +7,15 @@
     <EditText
         android:hint="@string/item"
         android:id="@+id/grocery_list_row_item"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
-    <EditText
-        android:hint="@string/price"
-        android:id="@+id/grocery_list_row_price"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center_horizontal"/>
 
     <CheckBox
         android:id="@+id/grocery_list_row_checkbox"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:button="@drawable/checkbox"/>
 
 </LinearLayout>

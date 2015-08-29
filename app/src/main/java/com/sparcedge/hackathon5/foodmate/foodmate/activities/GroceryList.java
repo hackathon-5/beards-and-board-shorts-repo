@@ -20,7 +20,6 @@ import com.sparcedge.hackathon5.foodmate.foodmate.views.GroceryListItemView;
  */
 public class GroceryList extends AppCompatActivity implements OnClickListener, DialogOnClickListener{
 
-    TextView total = null;
     Button addItem = null;
     GroceryListItemView groceryListItemView = null;
     AddGroceryListRowDialog addGroceryListRowDialog = null;
@@ -29,7 +28,6 @@ public class GroceryList extends AppCompatActivity implements OnClickListener, D
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_grocery_list);
-        total = (TextView)findViewById(R.id.grocery_list_total);
         addItem = (Button)findViewById(R.id.grocery_list_button);
         groceryListItemView = (GroceryListItemView)findViewById(R.id.grocery_list);
         addGroceryListRowDialog = new AddGroceryListRowDialog();
