@@ -11,4 +11,8 @@
     <!-- grocery list-->
     <string name="total">Total</string>
     <string name="add_item">Add Item</string>
+
+    <!-- grocery list row-->
+    <string name="item">Item</string>
+    <string name="price">Price</string>
 </resources>
