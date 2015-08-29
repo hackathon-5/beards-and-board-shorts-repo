@@ -1,6 +1,8 @@
 package com.sparcedge.hackathon5.foodmate.foodmate.activities;
 
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
@@ -8,19 +10,29 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.TextView;
+import android.widget.CheckBox;
+import android.widget.EditText;
+import android.widget.LinearLayout;
 
 import com.sparcedge.hackathon5.foodmate.foodmate.R;
 import com.sparcedge.hackathon5.foodmate.foodmate.api.DialogOnClickListener;
+import com.sparcedge.hackathon5.foodmate.foodmate.api.GroceryListItem;
 import com.sparcedge.hackathon5.foodmate.foodmate.views.AddGroceryListRowDialog;
 import com.sparcedge.hackathon5.foodmate.foodmate.views.GroceryListItemView;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
 
 /**
  * this class is the actual list view
  */
 public class GroceryList extends AppCompatActivity implements OnClickListener, DialogOnClickListener {
-
+    public static final String GROCERIES = "Groceries";
     Button addItem = null;
+    Button saveList = null;
     GroceryListItemView groceryListItemView = null;
     AddGroceryListRowDialog addGroceryListRowDialog = null;
     private String mCurrentUser;
@@ -30,12 +42,17 @@ public class GroceryList extends AppCompatActivity implements OnClickListener, D
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_grocery_list);
         addItem = (Button)findViewById(R.id.grocery_list_button);
+        saveList = (Button)findViewById(R.id.save_grocery_list_button);
         groceryListItemView = (GroceryListItemView)findViewById(R.id.grocery_list);
         addGroceryListRowDialog = new AddGroceryListRowDialog();
         addItem.setOnClickListener(this);
+        saveList.setOnClickListener(this);
 
         // Get the current user and set the title using the username.
         SetTitleToCurrentUser(savedInstanceState);
+
+        // Load any stored grocery list items into the view.
+        LoadGroceryList();
     }
 
     @Override
@@ -64,6 +81,8 @@ public class GroceryList extends AppCompatActivity implements OnClickListener, D
     public void onClick(View v) {
         if (v == addItem) {
             addGroceryListRowDialog.show(getSupportFragmentManager(), "dialog");
+        } else if (v == saveList) {
+            SaveGroceryList();
         }
     }
 
@@ -84,6 +103,68 @@ public class GroceryList extends AppCompatActivity implements OnClickListener, D
             setTitle(mCurrentUser + "'s " + getTitle());
         } else {
             mCurrentUser = savedInstanceState.getString(Foodmate.CURRENT_USER);
+        }
+    }
+
+    private void SaveGroceryList() {
+        List<GroceryListItem> groceries = new ArrayList<>();
+
+        for(int i = 0; i < groceryListItemView.getChildCount(); i++)
+        {
+            LinearLayout row = (LinearLayout) groceryListItemView.getChildAt(i);
+
+            GroceryListItem groceryItem = new GroceryListItem();
+
+            groceryItem.setId(Integer.toString(i));
+
+            EditText editDescription = (EditText) row.getChildAt(0);
+            groceryItem.setDescription(editDescription.getText().toString());
+
+            CheckBox checkBox = (CheckBox) row.getChildAt(1);
+            groceryItem.setChecked(checkBox.isChecked());
+
+            groceries.add(groceryItem);
+        }
+
+        if (!groceries.isEmpty()) {
+            SharedPreferences savedGroceries = getSharedPreferences(mCurrentUser, Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = savedGroceries.edit();
+            Set<String> groceryItemStrings = savedGroceries.getStringSet(GROCERIES, new HashSet<String>());
+
+            // Clear out any previously stored groceries.
+            groceryItemStrings.clear();
+
+            for (GroceryListItem item : groceries) {
+                groceryItemStrings.add(item.toString());
+            }
+
+            editor.putStringSet(GROCERIES, groceryItemStrings);
+            editor.commit();
+        }
+    }
+
+    private void LoadGroceryList() {
+        SharedPreferences savedGroceries = getSharedPreferences(mCurrentUser, Context.MODE_PRIVATE);
+        Set<String> groceryItemStrings = savedGroceries.getStringSet(GROCERIES, new HashSet<String>());
+
+        if (!groceryItemStrings.isEmpty()) {
+            Iterator<String> iterator = groceryItemStrings.iterator();
+
+            List<GroceryListItem> groceries = new ArrayList<>();
+            
+            while(iterator.hasNext()){
+                String savedGroceryItemString = iterator.next();
+                GroceryListItem item = GroceryListItem.parse(savedGroceryItemString);
+                groceries.add(item);
+            }
+
+            if (!groceries.isEmpty()) {
+                for(int i = 0; i < groceries.size(); i++)
+                {
+                    // TODO Programmatically create a LinearLayout for each GroceryListItem
+                    // and add them to the view.
+                }
+            }
         }
     }
 }
