@@ -54,11 +54,7 @@ public class GroceryListItemView extends TableLayout {
     private View createRow(int style){
         View v;
         LayoutInflater inflater = LayoutInflater.from(getContext());
-        if(style == AddGroceryListRowDialog.PRODUCE){
-            v = inflater.inflate(R.layout.grocery_list_row_produce, this, false);
-        }else {
-            v = inflater.inflate(R.layout.grocery_list_row, this, false);
-        }
+        v = inflater.inflate(R.layout.grocery_list_row, this, false);
         setItemBackground(v, style);
         return v;
     }
