@@ -11,6 +11,7 @@
         android:layout_weight="1">
 
         <com.sparcedge.hackathon5.foodmate.foodmate.views.GroceryListItemView
+            android:id="@+id/grocery_list"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -23,12 +24,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <TextView
+            android:id="@+id/grocery_list_total"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="@string/total"
             android:layout_weight="1"
             android:gravity="center"/>
         <Button
+            android:id="@+id/grocery_list_button"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="@string/add_item"
