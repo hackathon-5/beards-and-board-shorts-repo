@@ -18,22 +18,26 @@ import com.sparcedge.hackathon5.foodmate.foodmate.views.GroceryListItemView;
 /**
  * this class is the actual list view
  */
-public class GroceryList extends AppCompatActivity implements OnClickListener, DialogOnClickListener{
+public class GroceryList extends AppCompatActivity implements OnClickListener, DialogOnClickListener {
 
     TextView total = null;
     Button addItem = null;
     GroceryListItemView groceryListItemView = null;
     AddGroceryListRowDialog addGroceryListRowDialog = null;
+    private String mCurrentUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_grocery_list);
-        total = (TextView)findViewById(R.id.grocery_list_total);
-        addItem = (Button)findViewById(R.id.grocery_list_button);
-        groceryListItemView = (GroceryListItemView)findViewById(R.id.grocery_list);
+        total = (TextView) findViewById(R.id.grocery_list_total);
+        addItem = (Button) findViewById(R.id.grocery_list_button);
+        groceryListItemView = (GroceryListItemView) findViewById(R.id.grocery_list);
         addGroceryListRowDialog = new AddGroceryListRowDialog();
         addItem.setOnClickListener(this);
+
+        // Get the current user and set the title using the username.
+        SetTitleToCurrentUser(savedInstanceState);
     }
 
     @Override
@@ -60,8 +64,8 @@ public class GroceryList extends AppCompatActivity implements OnClickListener, D
 
     @Override
     public void onClick(View v) {
-        if(v == addItem){
-            addGroceryListRowDialog.show(getSupportFragmentManager(),"dialog");
+        if (v == addItem) {
+            addGroceryListRowDialog.show(getSupportFragmentManager(), "dialog");
         }
     }
 
@@ -73,5 +77,15 @@ public class GroceryList extends AppCompatActivity implements OnClickListener, D
     @Override
     public void onDeclineClick(DialogInterface dialog) {
         dialog.cancel();
+    }
+
+    private void SetTitleToCurrentUser(Bundle savedInstanceState) {
+        if (savedInstanceState == null) {
+            Bundle extras = getIntent().getExtras();
+            mCurrentUser = extras.getString(Foodmate.CURRENT_USER);
+            setTitle(mCurrentUser + "'s " + getTitle());
+        } else {
+            mCurrentUser = savedInstanceState.getString(Foodmate.CURRENT_USER);
+        }
     }
 }
