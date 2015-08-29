@@ -6,18 +6,29 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.TextView;
 
 import com.sparcedge.hackathon5.foodmate.foodmate.R;
+import com.sparcedge.hackathon5.foodmate.foodmate.views.GroceryListItemView;
 
 /**
  * this class is the actual list view
  */
 public class GroceryList extends AppCompatActivity implements OnClickListener{
 
+    TextView total = null;
+    Button addItem = null;
+    GroceryListItemView groceryListItemView = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_foodmate);
+        total = (TextView)findViewById(R.id.grocery_list_total);
+        addItem = (Button)findViewById(R.id.grocery_list_button);
+        groceryListItemView = (GroceryListItemView)findViewById(R.id.grocery_list);
+        addItem.setOnClickListener(this);
     }
 
     @Override
@@ -44,7 +55,9 @@ public class GroceryList extends AppCompatActivity implements OnClickListener{
 
     @Override
     public void onClick(View v) {
-
+        if(v == addItem){
+            groceryListItemView.addRod();
+        }
     }
 
 }
