@@ -6,14 +6,16 @@ package com.sparcedge.hackathon5.foodmate.foodmate.api;
 public class GroceryListItem {
     public static String DELIMITER = ",";
     private String id;
+    private int type;
     private String description;
     private Boolean checked;
 
     public GroceryListItem() {
     }
 
-    public GroceryListItem(String id, String description, Boolean checked) {
+    public GroceryListItem(String id, int type, String description, Boolean checked) {
         this.id = id;
+        this.type = type;
         this.description = description;
         this.checked = checked;
     }
@@ -21,14 +23,15 @@ public class GroceryListItem {
     public static GroceryListItem parse(String groceryListItem) {
         String[] parts = groceryListItem.split(DELIMITER);
         String id = parts[0];
-        String description = parts[1];
+        int type = Integer.parseInt(parts[1]);
+        String description = parts[2];
         Boolean checked = false;
 
-        if (parts[2].equals("True")) {
+        if (parts[3].equals("True")) {
             checked = true;
         }
 
-        return new GroceryListItem(id, description, checked);
+        return new GroceryListItem(id, type, description, checked);
     }
 
     public String getId() {
@@ -37,6 +40,14 @@ public class GroceryListItem {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public int getType() {
+        return this.type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
     }
 
     public String getDescription() {
@@ -59,6 +70,8 @@ public class GroceryListItem {
         StringBuilder sb = new StringBuilder();
 
         sb.append(this.id);
+        sb.append(DELIMITER);
+        sb.append(Integer.toString(this.type));
         sb.append(DELIMITER);
         sb.append(this.description);
         sb.append(DELIMITER);
