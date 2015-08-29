@@ -1,6 +1,7 @@
 package com.sparcedge.hackathon5.foodmate.foodmate.activities;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
@@ -17,6 +18,7 @@ import com.sparcedge.hackathon5.foodmate.foodmate.R;
  */
 
 public class Foodmate extends AppCompatActivity implements OnClickListener {
+    public static final String PREFS_NAME = "Users";
 
     private Button mLoginButton;
     private EditText mUsername;
@@ -39,6 +41,8 @@ public class Foodmate extends AppCompatActivity implements OnClickListener {
                 LogIn(username, password);
             }
         });
+
+        InitializeUserSharedPreferences();
     }
 
     @Override
@@ -74,5 +78,15 @@ public class Foodmate extends AppCompatActivity implements OnClickListener {
             Intent groceryIntent = new Intent(this, GroceryList.class);
             startActivity(groceryIntent);
         }
+    }
+
+    private void InitializeUserSharedPreferences() {
+        SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
+        SharedPreferences.Editor editor = settings.edit();
+        editor.putString("User1", "Bob");
+        editor.putString("User2", "Alice");
+
+        // Commit the edits!
+        editor.commit();
     }
 }
