@@ -1,4 +1,4 @@
-package com.sparcedge.hackathon5.foodmate.foodmate;
+package com.sparcedge.hackathon5.foodmate.foodmate.activities;
 
 
 import android.support.v7.app.AppCompatActivity;
@@ -7,6 +7,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+
+import com.sparcedge.hackathon5.foodmate.foodmate.R;
 
 /*
     This is the class that controls the login for the app

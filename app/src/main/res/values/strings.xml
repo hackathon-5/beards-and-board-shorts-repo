@@ -1,6 +1,14 @@
 <resources>
     <string name="app_name">Foodmate</string>
 
-    <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+
+    <!-- login screen -->
+    <string name="usrename">Username</string>
+    <string name="password">Password</string>
+    <string name="login_button">Log In</string>
+
+    <!-- grocery list-->
+    <string name="total">Total</string>
+    <string name="add_item">Add Item</string>
 </resources>
