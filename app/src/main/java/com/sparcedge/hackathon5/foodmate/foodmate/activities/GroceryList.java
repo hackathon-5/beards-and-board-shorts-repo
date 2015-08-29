@@ -22,6 +22,7 @@ import com.sparcedge.hackathon5.foodmate.foodmate.views.GroceryListItemView;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -49,6 +50,9 @@ public class GroceryList extends AppCompatActivity implements OnClickListener, D
 
         // Get the current user and set the title using the username.
         SetTitleToCurrentUser(savedInstanceState);
+
+        // Load any stored grocery list items into the view.
+        LoadGroceryList();
     }
 
     @Override
@@ -127,12 +131,40 @@ public class GroceryList extends AppCompatActivity implements OnClickListener, D
             SharedPreferences.Editor editor = savedGroceries.edit();
             Set<String> groceryItemStrings = savedGroceries.getStringSet(GROCERIES, new HashSet<String>());
 
+            // Clear out any previously stored groceries.
+            groceryItemStrings.clear();
+
             for (GroceryListItem item : groceries) {
                 groceryItemStrings.add(item.toString());
             }
 
             editor.putStringSet(GROCERIES, groceryItemStrings);
             editor.commit();
+        }
+    }
+
+    private void LoadGroceryList() {
+        SharedPreferences savedGroceries = getSharedPreferences(mCurrentUser, Context.MODE_PRIVATE);
+        Set<String> groceryItemStrings = savedGroceries.getStringSet(GROCERIES, new HashSet<String>());
+
+        if (!groceryItemStrings.isEmpty()) {
+            Iterator<String> iterator = groceryItemStrings.iterator();
+
+            List<GroceryListItem> groceries = new ArrayList<>();
+            
+            while(iterator.hasNext()){
+                String savedGroceryItemString = iterator.next();
+                GroceryListItem item = GroceryListItem.parse(savedGroceryItemString);
+                groceries.add(item);
+            }
+
+            if (!groceries.isEmpty()) {
+                for(int i = 0; i < groceries.size(); i++)
+                {
+                    // TODO Programmatically create a LinearLayout for each GroceryListItem
+                    // and add them to the view.
+                }
+            }
         }
     }
 }
