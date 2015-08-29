@@ -9,7 +9,8 @@
     <string name="login_button">Log In</string>
 
     <!-- grocery list-->
-    <string name="add_item">Add Item</string>
+    <string name="add_item">Add Grocery Item</string>
+    <string name="save_list">Save Grocery List</string>
 
     <!-- grocery list row-->
     <string name="item">Item</string>
