@@ -2,22 +2,28 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="match_parent">
 
     <EditText
         android:hint="@string/item"
-        android:id="@+id/grocery_list_row_item"
+        android:id="@+id/grocery_list_row_produce_item"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
     <EditText
-        android:hint="@string/price"
-        android:id="@+id/grocery_list_row_price"
+        android:hint="@string/price_per_pound"
+        android:id="@+id/grocery_list_row_produce_price_per_pound"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <EditText
+        android:hint="@string/pounds"
+        android:id="@+id/grocery_list_row_produce_pounds"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
     <CheckBox
-        android:id="@+id/grocery_list_row_checkbox"
+        android:id="@+id/grocery_list_row_produce_checkbox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 

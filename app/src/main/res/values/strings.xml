@@ -15,4 +15,9 @@
     <!-- grocery list row-->
     <string name="item">Item</string>
     <string name="price">Price</string>
+    <string name="price_per_pound">Price / Pound</string>
+    <string name="pounds">Pounds</string>
+
+    <!-- select item dialog-->
+    <string name="select_item_dialog_title">Select Item Type</string>
 </resources>

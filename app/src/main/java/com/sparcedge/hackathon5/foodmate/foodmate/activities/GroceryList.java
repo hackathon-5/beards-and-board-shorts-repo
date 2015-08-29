@@ -1,5 +1,6 @@
 package com.sparcedge.hackathon5.foodmate.foodmate.activities;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
@@ -10,16 +11,19 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.sparcedge.hackathon5.foodmate.foodmate.R;
+import com.sparcedge.hackathon5.foodmate.foodmate.api.DialogOnClickListener;
+import com.sparcedge.hackathon5.foodmate.foodmate.views.AddGroceryListRowDialog;
 import com.sparcedge.hackathon5.foodmate.foodmate.views.GroceryListItemView;
 
 /**
  * this class is the actual list view
  */
-public class GroceryList extends AppCompatActivity implements OnClickListener{
+public class GroceryList extends AppCompatActivity implements OnClickListener, DialogOnClickListener{
 
     TextView total = null;
     Button addItem = null;
     GroceryListItemView groceryListItemView = null;
+    AddGroceryListRowDialog addGroceryListRowDialog = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +32,7 @@ public class GroceryList extends AppCompatActivity implements OnClickListener{
         total = (TextView)findViewById(R.id.grocery_list_total);
         addItem = (Button)findViewById(R.id.grocery_list_button);
         groceryListItemView = (GroceryListItemView)findViewById(R.id.grocery_list);
+        addGroceryListRowDialog = new AddGroceryListRowDialog();
         addItem.setOnClickListener(this);
     }
 
@@ -56,8 +61,17 @@ public class GroceryList extends AppCompatActivity implements OnClickListener{
     @Override
     public void onClick(View v) {
         if(v == addItem){
-            groceryListItemView.addRod();
+            addGroceryListRowDialog.show(getSupportFragmentManager(),"dialog");
         }
     }
 
+    @Override
+    public void onAcceptClick() {
+        groceryListItemView.addRod();
+    }
+
+    @Override
+    public void onDeclineClick(DialogInterface dialog) {
+        dialog.cancel();
+    }
 }
