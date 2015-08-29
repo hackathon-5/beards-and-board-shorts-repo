@@ -4,7 +4,7 @@
     <string name="action_settings">Settings</string>
 
     <!-- login screen -->
-    <string name="usrename">Username</string>
+    <string name="username">Username</string>
     <string name="password">Password</string>
     <string name="login_button">Log In</string>
 
