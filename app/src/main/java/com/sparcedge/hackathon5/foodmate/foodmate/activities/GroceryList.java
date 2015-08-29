@@ -117,7 +117,7 @@ public class GroceryList extends AppCompatActivity implements OnClickListener, D
 
             groceryItem.setId(Integer.toString(i));
 
-            groceryItem.setType(0);
+            groceryItem.setType(groceryListItemView.getGroceryType(row));
 
             EditText editDescription = (EditText) row.getChildAt(0);
             groceryItem.setDescription(editDescription.getText().toString());
