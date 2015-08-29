@@ -18,7 +18,8 @@ import com.sparcedge.hackathon5.foodmate.foodmate.R;
  */
 
 public class Foodmate extends AppCompatActivity implements OnClickListener {
-    public static final String PREFS_NAME = "Users";
+    public static final String PREFS_USER_NAMES = "UserNames";
+    public static final String CURRENT_USER = "CurrentUser";
 
     private Button mLoginButton;
     private EditText mUsername;
@@ -74,15 +75,23 @@ public class Foodmate extends AppCompatActivity implements OnClickListener {
     }
 
     private void LogIn(String username, String password) {
-        if (null != username && null != password && username.equals("Noah")) {
-            Intent groceryIntent = new Intent(this, GroceryList.class);
-            startActivity(groceryIntent);
+        if (null != username && null != password) {
+
+            SharedPreferences users = getSharedPreferences(PREFS_USER_NAMES, 0);
+            final String user1 = users.getString("User1", "");
+            final String user2 = users.getString("User2", "");
+
+            if (username.equals(user1) || username.equals(user2)) {
+                Intent groceryIntent = new Intent(this, GroceryList.class);
+                groceryIntent.putExtra(CURRENT_USER, username);
+                startActivity(groceryIntent);
+            }
         }
     }
 
     private void InitializeUserSharedPreferences() {
-        SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
-        SharedPreferences.Editor editor = settings.edit();
+        SharedPreferences users = getSharedPreferences(PREFS_USER_NAMES, 0);
+        SharedPreferences.Editor editor = users.edit();
         editor.putString("User1", "Bob");
         editor.putString("User2", "Alice");
 
